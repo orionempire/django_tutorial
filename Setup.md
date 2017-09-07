@@ -28,6 +28,7 @@ docker logs `docker ps|grep djangotutorial_web|cut -d' ' -f1`
 docker exec -i -t `docker ps|grep djangotutorial_web|cut -d' ' -f1` /bin/bash
 # Data
 curl http://localhost:8000
+curl http://localhost:8000/polls/
 ```
 
 Wipe Host
