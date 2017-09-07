@@ -11,7 +11,8 @@ pip install --upgrade pip
 Initial Build 
 ```bash
 docker-compose run web django-admin.py startproject django_tutorial .
-docker-compose run web python manage.py startapp poll .
+docker-compose run web python manage.py startapp poll ./polls #?
+docker-compose run web python manage.py migrate
 ```
 
 Launch 
@@ -38,3 +39,8 @@ docker rm $(docker ps -a -q)
 # Remove all images from this machine
 docker rmi $(docker images -q)
 ```
+
+docker exec -i -t  djangotutorial_db_1 /bin/bash
+psql -U postgres
+\dt
+\q
