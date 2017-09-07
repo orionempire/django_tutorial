@@ -5,4 +5,8 @@ sudo easy_install pip
 pip install --upgrade pip
 ```
 
-
+```bash
+docker-compose run web django-admin.py startproject django_tutorial .
+docker-compose up -d
+docker-compose down
+```
