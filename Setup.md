@@ -30,6 +30,9 @@ docker exec -i -t `docker ps|grep djangotutorial_web|cut -d' ' -f1` /bin/bash
 # Data
 curl http://localhost:8000
 curl http://localhost:8000/polls/
+#Database
+docker exec -i -t  djangotutorial_db_1 /bin/bash
+psql -U postgres
 ```
 
 Wipe Host
@@ -40,7 +43,5 @@ docker rm $(docker ps -a -q)
 docker rmi $(docker images -q)
 ```
 
-docker exec -i -t  djangotutorial_db_1 /bin/bash
-psql -U postgres
 \dt
 \q
