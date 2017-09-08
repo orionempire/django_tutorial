@@ -1,5 +1,8 @@
 https://docs.docker.com/compose/django/
 
+U:admin
+P:qwerty123
+
 Initialize environment
 ```bash
 rmvirtualenv django_tutorial_3_7
@@ -29,7 +32,6 @@ docker logs `docker ps|grep djangotutorial_web|cut -d' ' -f1`
 docker exec -i -t `docker ps|grep djangotutorial_web|cut -d' ' -f1` /bin/bash
 # Data
 curl http://localhost:8000
-curl http://localhost:8000/polls/
 #Database
 docker exec -i -t  djangotutorial_db_1 /bin/bash
 psql -U postgres
@@ -43,5 +45,17 @@ docker rm $(docker ps -a -q)
 docker rmi $(docker images -q)
 ```
 
-\dt
-\q
+[admin](http://127.0.0.1:8000/admin/)
+[polls](http://127.0.0.1:8000/polls/)
+
+visualizer:
+    image: dockersamples/visualizer:stable
+    ports:
+      - "8080:8080"
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
+    deploy:
+      placement:
+        constraints: [node.role == manager]
+    networks:
+      - webnet
