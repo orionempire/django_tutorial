@@ -5,8 +5,8 @@ services:
     image: postgres
     volumes:
       - ./database:/var/lib/postgresql/data
-    #ports:
-      #- 5432:5432
+    #Uncomment to diagnose DB from host
+    #ports: "5432:5432"
   web:
     build: .
     command: python3 manage.py runserver 0.0.0.0:8000

@@ -13,11 +13,23 @@ pip install --upgrade pip
 
 Initial Build 
 ```bash
+workon django_tutorial_3_7
+mkdir database
 docker-compose run web django-admin.py startproject django_tutorial .
 docker-compose run web python manage.py startapp poll ./polls #?
 docker-compose run web python manage.py migrate
 ```
 
+ReBuild
+```bash
+workon django_tutorial_3_7
+rm -fr ./database
+mkdir database
+docker-compose up -d
+docker ps --all
+docker-compose run web python manage.py migrate
+docker-compose down
+```
 Launch 
 ```bash
 docker-compose up -d
@@ -35,6 +47,7 @@ curl http://localhost:8000
 #Database
 docker exec -i -t  djangotutorial_db_1 /bin/bash
 psql -U postgres
+#\l \dt \q
 ```
 
 Wipe Host
