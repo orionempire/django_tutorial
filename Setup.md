@@ -33,6 +33,7 @@ docker-compose down
 Launch 
 ```bash
 docker-compose up -d
+curl http://localhost:8000
 docker-compose down
 ```
 
