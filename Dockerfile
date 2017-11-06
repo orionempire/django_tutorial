@@ -4,4 +4,5 @@ RUN mkdir /code
 WORKDIR /code
 ADD ./docker/requirements.txt /code/
 RUN pip install -r requirements.txt
-ADD . /code/
+ADD ./application /code/
+
