@@ -1,4 +1,6 @@
-#Django Tutorial 1
+# Django Tutorial 2
+
+    (*) -> run first time only
 https://docs.docker.com/compose/django/
 https://docs.djangoproject.com/en/1.11/intro/tutorial01/
 
@@ -19,6 +21,7 @@ mkdir database
 cd application
 django-admin startproject django_tutorial .
 python manage.py startapp polls
+docker-compose run web python manage.py migrate #(*)
 ```
 
 ### Run Cluster
@@ -35,6 +38,7 @@ docker-compose down
 ### Clean Up
 ```bash
 docker rmi djangotutorial_web
+mv database /tmp/delme; mkdier database
 ```
 
 ### Diagnostics
