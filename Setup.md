@@ -1,8 +1,15 @@
 # Django Tutorial 2
 
-    (*) -> run first time only
 https://docs.docker.com/compose/django/
 https://docs.djangoproject.com/en/1.11/intro/tutorial01/
+
+    (*) -> run first time only
+    U:admin
+    P:qwerty123
+    
+```bash
+alias db="docker-compose run web"
+```
 
 ### Initialize Environment (*)
 ```bash
@@ -19,9 +26,22 @@ pip install django
 rm -fr ./database
 mkdir database
 cd application
-django-admin startproject django_tutorial .
-python manage.py startapp polls
-docker-compose run web python manage.py migrate #(*)
+db django-admin startproject django_tutorial .
+db python manage.py startapp polls
+#(*)
+db python manage.py migrate 
+db python manage.py makemigrations polls
+db python manage.py sqlmigrate polls 0001
+db python manage.py migrate
+db python manage.py shell
+#>>> 
+from polls.models import Question, Choice
+from django.utils import timezone
+q = Question(question_text="What's up?", pub_date=timezone.now())
+q.choice_set.create(choice_text='Not much', votes=0)
+q.choice_set.create(choice_text='The sky', votes=0)
+q.save()
+#>>> 
 ```
 
 ### Run Cluster
@@ -31,6 +51,7 @@ curl http://localhost:8000
 ```
 [admin](http://127.0.0.1:8000/admin/)
 [polls](http://127.0.0.1:8000/polls/)
+[visualizer](http://127.0.0.1:8080)
 ```bash
 docker-compose down
 ```
@@ -38,11 +59,19 @@ docker-compose down
 ### Clean Up
 ```bash
 docker rmi djangotutorial_web
-mv database /tmp/delme; mkdier database
+mv database /tmp/delme; mkdir database
 ```
 
 ### Diagnostics
 ```bash
-docker-compose run web python -m django --version
-docker-compose run web /bin/bash
+db python -m django --version
+db bash
+
 ```
+docker-compose restart web
+
+#ADD ./application /code/
+ENTRYPOINT [docker_entrypoint.py"]
+ENTRYPOINT ["/config/docker_entrypoint.py"]
+
+ADD ./docker/requirements.txt /code/

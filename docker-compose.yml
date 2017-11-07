@@ -5,23 +5,19 @@ services:
     image: postgres
     volumes:
       - ./database:/var/lib/postgresql/data
-    #Uncomment to diagnose DB from host
+    #Uncomment to diagnose DB from host IDE
     #ports: "5432:5432"
   web:
     build: .
-    command: python3 manage.py runserver 0.0.0.0:8000
+    command:
+      - /bin/sh
+      - -c
+      - |
+        /config/docker_entrypoint.py
+        python3 manage.py runserver 0.0.0.0:8000
     ports:
       - "8000:8000"
+    volumes:
+      - ./application:/code
     depends_on:
       - db
-#  visualizer:
-#    image: dockersamples/visualizer:stable
-#    ports:
-#      - "8080:8080"
-#    volumes:
-#      - "/var/run/docker.sock:/var/run/docker.sock"
-#    deploy:
-#      placement:
-#        constraints: [node.role == manager]
-#    networks:
-#      - webnet

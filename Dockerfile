@@ -1,8 +1,8 @@
 FROM python:3
 ENV PYTHONUNBUFFERED 1
 RUN mkdir /code
+RUN mkdir /config
 WORKDIR /code
-ADD ./docker/requirements.txt /code/
-RUN pip install -r requirements.txt
-ADD ./application /code/
+ADD ./docker/* /config/
+RUN pip install -r /config/requirements.txt
 
