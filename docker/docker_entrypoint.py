@@ -20,11 +20,12 @@ def check_server(address, port):
 
 
 if __name__ == '__main__':
-    for i in range(1, 10):
+    for i in range(1, 5):
         if check_server('db', 5432):
             print("Found DB continuing")
             break
         else:
-            print("Couldn't find DB in attempt " + str(i) + " delaying 1 seconds")
-            time.sleep(1)
+            print("Couldn't find DB in attempt %s delaying %s seconds" % (i, i))
+
+            time.sleep(i)
     print("Continuing start up regardless")
