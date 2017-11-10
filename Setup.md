@@ -67,6 +67,10 @@ mv database /tmp/delme; mkdir database
 db python -m django --version
 db bash
 
+#Database
+docker exec -it  djangotutorial_db_1 /bin/bash
+psql -U postgres
+#\l \dt \q
 ```
 docker-compose restart web
 
