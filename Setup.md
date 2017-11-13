@@ -30,8 +30,7 @@ mkdir database
 cd application
 db django-admin startproject django_tutorial .
 db python manage.py startapp polls
-#(*)
-db python manage.py migrate 
+db python manage.py migrate
 db python manage.py makemigrations polls
 db python manage.py sqlmigrate polls 0001
 db python manage.py migrate
