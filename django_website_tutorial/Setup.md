@@ -8,7 +8,9 @@ https://docs.djangoproject.com/en/1.11/intro/tutorial04/
     P:qwerty123
     
 ```bash
-alias db="docker-compose run web"
+alias d-c="docker-compose"
+alias d-r="docker-compose run"
+alias d-w="docker-compose run web"
 ```
 
 ### Initialize Environment (*)
@@ -17,24 +19,24 @@ rmvirtualenv django_tutorial_3_7
 mkvirtualenv --python=/Library/Frameworks/Python.framework/Versions/3.6/bin/python3 django_tutorial_3_7
 sudo easy_install pip
 pip install --upgrade pip
+pip install django
+pip install psycopg2
 
 ```
 
 ### Initialize Cluster (*)
 ```bash
 workon django_tutorial_3_7
-pip install django
-pip install psycopg2
 rm -fr ./database
 mkdir database
 cd application
-db django-admin startproject django_tutorial .
-db python manage.py startapp polls
-db python manage.py migrate
-db python manage.py makemigrations polls
-db python manage.py sqlmigrate polls 0001
-db python manage.py migrate
-db python manage.py shell
+d-w django-admin startproject django_tutorial .
+d-w python manage.py startapp polls
+d-w python manage.py migrate
+d-w python manage.py makemigrations polls
+d-w python manage.py sqlmigrate polls 0001
+d-w python manage.py migrate
+d-w python manage.py shell
 #>>>
 from polls.models import Question, Choice
 from django.utils import timezone
