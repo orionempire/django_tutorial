@@ -9,26 +9,23 @@ pip install --upgrade pip
 
 ```
 
-### Initialize
+### Initialize & start
 ```bash
-workon django_tutorial_3_7
-docker build -t oreilly_lightweight_django_01 .
-```
-
-
-### Start
-```bash
-docker build -t oreilly_lightweight_django_01 .; docker run -p 8000:8000  oreilly_lightweight_django_01
+./launch.sh
 ```
 
 [access](http://127.0.0.1:8000)
 
 ### Kill
 ```bash
-docker kill `docker ps|grep oreilly_lightweight_django_01|cut -d' ' -f1`
+docker kill `docker ps|grep oreilly_lightweight_django|cut -d' ' -f1`
 ```
 
 ### Diagnose
 ```bash
-docker exec -it `docker ps|grep oreilly_lightweight_django_01|cut -d' ' -f1` bash
+docker exec -it `docker ps|grep oreilly_lightweight_django_XX|cut -d' ' -f1` bash
 ```
+
+### Cleanup
+docker rm $(docker images |grep oreilly_lightweight_djang)
+docker rm $(docker ps -a -q)           # Remove all containers from this machine
